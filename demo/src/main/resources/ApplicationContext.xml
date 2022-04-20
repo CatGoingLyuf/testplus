@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/tx ">
+    <aop:config>
+        <aop:aspect id="TestAspect" ref="aspectBean">
+            <!--配置com.spring.service包下所有类或接口的所有方法-->
+            <aop:pointcut id="businessService" expression="execution(* com.aop.*.*(..))"/>
+            <aop:before pointcut-ref="businessService" method="doBefore"/>
+            <aop:after pointcut-ref="businessService" method="doAfter"/>
+            <aop:around pointcut-ref="businessService" method="doAround"/>
+            <aop:after-throwing pointcut-ref="businessService" method="doThrowing" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="aspectBean" class="com.aop.TestAspect"/>
+    <bean id="aService" class="com.aop.JDKServiceImpl"/>
+    <bean id="bService" class="com.aop.CGLibServiceImpl"/>
+
+
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+    </bean>
+    <!--             开启事务              -->
+    <!-- 事务核心管理器,封装了所有事务操作. 依赖于连接池 -->
+    <bean name="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 配置事务通知 -->
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            &lt;!&ndash; 企业中配置CRUD方法一般使用方法名+通配符*的形式配置通知，此时类中的方法名要和配置的方法名一致 &ndash;&gt;-->
+<!--            &lt;!&ndash; 以方法为单位,指定方法应用什么事务属性-->
+<!--                isolation：用于指定事务的隔离级别。默认值是DEFAULT，表示使用数据库的默认隔离级别。-->
+<!--                propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。-->
+<!--                read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。-->
+<!--                timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。-->
+<!--                rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。-->
+<!--                no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。-->
+<!--             &ndash;&gt;-->
+<!--            <tx:method name="save*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="persist*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="update*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="modify*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="delete*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="remove*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--            <tx:method name="get*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="true" />-->
+<!--            <tx:method name="find*" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="true" />-->
+<!--            <tx:method name="transfer" isolation="REPEATABLE_READ"-->
+<!--                       propagation="REQUIRED" read-only="false" />-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+    <!-- 开启spring对注解事务的支持-->
+    <tx:annotation-driven />
+    <!-- 配置织入 -->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash; 配置切点表达式 &ndash;&gt;-->
+<!--        <aop:pointcut expression="execution(* com.example.transactiondemo.service.*ServiceImpl.*(..))" id="txPc" />-->
+<!--        &lt;!&ndash; 配置切面 : 通知+切点 advice-ref:通知的名称 pointcut-ref:切点的名称 &ndash;&gt;-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc" />-->
+<!--    </aop:config>-->
+
+    <bean name="accountDao" class="com.example.transactiondemo.dao.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean name="accountService" class="com.example.transactiondemo.service.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+</beans>

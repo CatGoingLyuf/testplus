@@ -1,0 +1,33 @@
+1.条件构造（组合匹配条件）
+ BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+{2.把查询条件添加到条件构造
+   boolQueryBuilder.must(QueryBuilders.matchQuery("status",status));
+      if (name != null){
+          boolQueryBuilder.must(QueryBuilders.matchPhraseQuery("name",name));
+      }
+      if (bigclass != null){
+          boolQueryBuilder.must(QueryBuilders.matchPhraseQuery("bigclass",bigclass));
+        }
+    用must去设定必须满足的条件，should去设置加分项。
+
+  //或者可以这么认为
+  0.2.构建匹配条件
+   MatchQueryBuilder queryBuilder =QueryBuilders.matchQuery("status",status)
+  MatchPhraseQueryBuilder matchPhraseQuery = QueryBuilders.matchPhraseQuery("name", name);
+   0.2.1添加到bool条件中
+    boolQueryBuilder.must(queryBuilder );
+    boolQueryBuilder.must(matchPhraseQuery );
+
+}
+3.创建查询
+SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.query(boolQueryBuilder).postFilter();
+4.创建查询索引对象
+        SearchRequest searchRequest = new SearchRequest(indexname);
+        searchRequest.source(sourceBuilder);
+        SearchResponse response=restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+5.response为查询结果集
+        SearchHit[] hits = response.getHits().getHits();
+遍历
+for(SearchHit hit : hits){
+}

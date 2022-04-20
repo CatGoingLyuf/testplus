@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Config
+clusters:
+  - name: "alpha-test"
+    cluster:
+      server: "https://10.50.51.49/k8s/clusters/c-d2p75"
+      certificate-authority-data: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpRENDQ\
+      VM2Z0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQTdNUnd3R2dZRFZRUUtFeE5rZVc1aGJXbGoKY\
+      kdsemRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR1Z1WlhJdFkyRXdIa\
+      GNOTWpFdwpOREkyTVRJME9URTJXaGNOTXpFd05ESTBNVEkwT1RFMldqQTdNUnd3R2dZRFZRUUtFe\
+      E5rZVc1aGJXbGpiR2x6CmRHVnVaWEl0YjNKbk1Sc3dHUVlEVlFRREV4SmtlVzVoYldsamJHbHpkR\
+      1Z1WlhJdFkyRXdXVEFUQmdjcWhrak8KUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVNCRElXWHBkOG50N\
+      FF6RjYzcXdWdmhqek03cERFc01GNzZUQW9SNVd6VwpWamwzM0Jyc1Ixak1SeWNIcTNXQ1pFbjA0W\
+      XgwSFdEUDJ5QmE2Y1lqaU4wTm95TXdJVEFPQmdOVkhROEJBZjhFCkJBTUNBcVF3RHdZRFZSMFRBU\
+      UgvQkFVd0F3RUIvekFLQmdncWhrak9QUVFEQWdOSUFEQkZBaUE5bWNHUW5XL3gKMjJZejhSZ3N4T\
+      zhlVHFacVlRc1VTT3hBa3lDeHhTU3FDZ0loQU0rV2FqbWU1VC9HRXhLbUpnSXBlbHFMbU9xZAp6R\
+      k0rMmppZlRpWVJ1Tmh0Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0="
+  - name: "alpha-test-k8s-alpha-node2"
+    cluster:
+      server: "https://192.168.195.3:6443"
+      certificate-authority-data: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN3akNDQ\
+      WFxZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFTTVJBd0RnWURWUVFERXdkcmRXSmwKT\
+      FdOaE1CNFhEVEl4TURReU5qRXlOVGN6TkZvWERUTXhNRFF5TkRFeU5UY3pORm93RWpFUU1BNEdBM\
+      VVFQXhNSAphM1ZpWlMxallUQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ\
+      0VCQU1EUHJZRUw4SDFhCjRCWHFGZlRnWkxUL1FWb0NQWU50MWJrYkRMaVNqcThHU2RJTStjcTlOM\
+      TlFc2dSekN3b3lkeDFUUUJuNWpHVGUKVk5hL1JlMi9SSVZYTlBoSUJUaGlacU4wS3ZIY0pOZGwwZ\
+      kdoY2NmdzBxTlo5ZXpRRE16dVpEblh4K3doYjlnaQpZcG5sWitncnBlU3lyTCtoS0JjbHUvWDhua\
+      DBvNnNEbXZwWk43OTVsWkttZGxIRkdNTkkvTnpqRG45T2ptQzB3Ckd3YTcxZmFQSE9aNEkvc25tb\
+      3d4YXJnSlgzbXVvMDZ3dXFaenpsTkdpdU9yNXlVS2JjdlBKSmIwbjZyOUFVSnoKTWRMU092a1JWR\
+      GxnVUxkQjNSMUc0Z3JRQUpDQW9lUVJlNlJndUNEdEFaNlNHZG5vTUhVSlVsQWVDeTlOTU15VgoyV\
+      kdWUjNKOHVpVUNBd0VBQWFNak1DRXdEZ1lEVlIwUEFRSC9CQVFEQWdLa01BOEdBMVVkRXdFQi93U\
+      UZNQU1CCkFmOHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBQTBXMXd2TGhWc1B6cFJJNjd6Z05VR\
+      VVHdVNpdlptRUt1TloKOXlHZWE3VkY2ZGllQkFYcXV1WHNvR1NlZzgreFZCdHBCZVg1bXNzYVNyb\
+      FVIcGZlMWlUZW5MYXRBVGZRanhlOQo4NGJhWXU1VGFTOHZDTXJoTE9uRFRMVVZkMzl5U2NKVmJsc\
+      TQyNGxSdmRTRExNa1pZamlDYTdoZWdtZUlVUmR4CmhibnlnV1BPY2t4MDBiQmhtdVUvYVhBdVhiK\
+      3ZJemhCb1RRQW5EaTlnU3cyNzRsZFNQejA2MnlRUlBjcjd6MnEKaXVmT0NXUnVrWFg2bEdBalEwR\
+      HhhYTlKQzNRc3BCKy9KWDZMa3lIMmQ4VHU3UDBWMkdacGI0OWgvNXJ0RXg4agp2YjlHT3VLZ2NwT\
+      2lZTUl3OGtNK0cxSEdIcWUzSXhuTCsxOWk1VTQ1d0pyS05YU2pUVXc9Ci0tLS0tRU5EIENFUlRJR\
+      klDQVRFLS0tLS0K"
+
+users:
+  - name: "alpha-test"
+    user:
+      token: "kubeconfig-user-b5r5z.c-d2p75:p2x9g596ggxxwtp8sjrdkxmjnprrvdk6fs2bnfz7ppz9n7jk9x5jm7"
+
+
+contexts:
+  - name: "alpha-test"
+    context:
+      user: "alpha-test"
+      cluster: "alpha-test"
+  - name: "alpha-test-k8s-alpha-node2"
+    context:
+      user: "alpha-test"
+      cluster: "alpha-test-k8s-alpha-node2"
+
+#current-context: "alpha-test"
+current-context: "alpha-test-k8s-alpha-node2"
