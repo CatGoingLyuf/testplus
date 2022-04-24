@@ -11,8 +11,8 @@ public class demo {
 
     @Test
     public void test(){
-        String a = "123456Aa";
-        boolean b = RegexUtils.checkPassword(a,8,20);
+        String a = "1.1.1.0";
+        boolean b = RegexUtils.checkIpAddress(a);
 //        boolean b = RegexUtils.checkOsName(a);
         System.out.println(b);
     }
