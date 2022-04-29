@@ -4,8 +4,9 @@ import org.junit.Test;
 import scala.collection.Set;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /**
  * @Author lyuf
@@ -59,6 +60,15 @@ public class test {
         List<String> listAllDistinct = listAll.stream().distinct().collect(toList());
         System.out.println("---得到去重并集 listAllDistinct---");
         listAllDistinct.parallelStream().forEachOrdered(System.out::println);
+
+        //去重
+//        projectDtosResult = projectDtosResult.stream().collect(
+//                collectingAndThen(
+//                        toCollection(() -> new TreeSet<>(Comparator.comparing(ProjectDto::getId))), ArrayList::new)
+//        );
+
+        //
+//        Map<String, String> passwordMap = clusterLinkDTO.getNodeList().stream().collect(Collectors.toMap(NodeInfo::getIp, NodeInfo::getPassword));
 
         System.out.println("---原来的List1---");
         list1.parallelStream().forEachOrdered(System.out::println);

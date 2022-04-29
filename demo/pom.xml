@@ -99,22 +99,22 @@
             <version>8.0.2</version>
         </dependency>
         <!--        kubernetes - fabric    -->
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>com.squareup.okhttp3</artifactId>
-                    <groupId>okhttp</groupId>
-                </exclusion>
-            </exclusions>
-            <version>5.10.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.fabric8</groupId>-->
+<!--            <artifactId>kubernetes-client</artifactId>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>com.squareup.okhttp3</artifactId>-->
+<!--                    <groupId>okhttp</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--            <version>5.10.1</version>-->
+<!--        </dependency>-->
         <!--        openstack  -->
         <dependency>
             <groupId>org.pacesys</groupId>
             <artifactId>openstack4j</artifactId>
-            <version>3.0.4</version>
+            <version>3.2.0</version>
             <classifier>withdeps</classifier>
         </dependency>
         <!-- kafka -->

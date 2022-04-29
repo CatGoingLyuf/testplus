@@ -1,9 +1,11 @@
 package com.stream;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author lyuf
@@ -32,5 +34,29 @@ public class test {
 //            System.out.println(s);
 //        });
 
+    }
+
+    @Test
+    public void test() {
+        User aaa = new User("aaa", "16", "1", "10");
+        User vvv = new User("vvv", "17", "1", "10");
+        User bbb = new User("bbb", "18", "1", "10");
+        User ddd = new User("ddd", "19", "1", "10");
+        //此List与常用的List不同，它是Collections类里的静态内部类，在继承AbstractList后并没有实现add()、remove()等方法，所以返回的List不能进行增加和删除元素操作。
+        List<User> userList = Collections.emptyList();
+        List<User> list = new ArrayList<>(userList);
+        list.add(aaa);
+        list.add(vvv);
+        list.add(bbb);
+        list.add(ddd);
+
+        HashSet<String> resSet = Sets.newHashSet();
+        // 使用Lists.transform把对象list中的某个属性取出来  返回一个新的list 对于同一个List集合中，假定想获取User类中的String Age,String Name,两个属性的值情况的并集。
+        resSet.addAll(Lists.transform(list, User::getAge));
+        resSet.addAll(Lists.transform(list, User::getName));
+
+        List<String> collect = resSet.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        // [aaa, bbb, 16, ddd, 17, 18, vvv, 19]
+        System.out.println(collect);
     }
 }

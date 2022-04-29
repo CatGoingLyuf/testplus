@@ -20,6 +20,7 @@ import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.Router;
 import org.openstack4j.model.network.Subnet;
 import org.openstack4j.openstack.OSFactory;
+import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class OpenStackApiTest {
 
-    //private String url = "http://192.168.119.214:5000/v3";
+//    private String url = "http://192.168.119.214:5000/v3";
     private String url = "http://192.168.119.100:5000/v3";
     private String userName = "admin";
     private String password = "admin_ctsi";
@@ -51,7 +52,7 @@ public class OpenStackApiTest {
         Identifier domainIdentifier = Identifier.byName("Default");
         OSClientV3 os = null;
         try {
-            // 不同域内的项目名和用户名有可能相同。
+            // 不同域内的项目名和用户名有可能相同
             os = OSFactory.builderV3()
                     .endpoint(url) //(openstack url)
                     .credentials(username, password, domainIdentifier) //(userName,password,domainIdentifier)
@@ -59,7 +60,7 @@ public class OpenStackApiTest {
                     .authenticate();
             System.out.println("鉴权通过！");
         } catch (Exception e) {
-            System.out.println("error:" + e.getMessage());
+            log.error("鉴权失败:" + e.getMessage());
         }
         return os;
     }
@@ -155,23 +156,39 @@ public class OpenStackApiTest {
 
         Map<String, Flavor> filteringParams = new HashMap<String, Flavor>();
 
+//        List<? extends Flavor> list = os.compute().flavors().list();
+
+        // create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic)
+        Flavor testFlavor1 = Builders.flavor().name("testFlavor").ram(1024).disk(10).vcpus(1).isPublic(true).ephemeral(0).rxtxFactor(1).swap(0).build();
+//        Flavor flavor = os.compute().flavors().create(testFlavor1);
+        HashMap<String, String> map = new HashMap<>();
+
         List<? extends Flavor> list = os.compute().flavors().list();
+        Flavor testFlavor = list.stream().filter(flavor -> flavor.getName().equals("testFlavor")).collect(Collectors.toList()).get(0);
 
-        list.forEach(flavor -> {
+        ActionResponse delete = os.compute().flavors().delete(testFlavor.getId());
 
+        System.out.println(delete);
 
-            String ram = String.valueOf(flavor.getRam());
-            String disk = String.valueOf(flavor.getDisk());
-            String vcpus = String.valueOf(flavor.getVcpus());
-            String a = ram + disk + vcpus;
-            Integer b = flavor.getRam() + flavor.getDisk() + flavor.getVcpus();
-            System.out.println(a + ":" + b);
-            filteringParams.put(ram + disk + vcpus, flavor);
-        });
-        String ram = "2000";
-        String disk = "10";
-        String vcpus = "4";
-        System.out.println(filteringParams.get(ram + disk + vcpus));
+//        Flavor testFlavor1 = os.compute().flavors().create("testFlavor", 1024, 1, 10, 0, 0, 1, true);
+//        try {
+//            Flavor flavor = os.compute().flavors().create(testFlavor1);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+
+//        ActionResponse delete = os.compute().flavors().delete(flavor.getId());
+//        System.out.println(delete);
+
+//        list.forEach(flavor -> {
+//            String ram = String.valueOf(flavor.getRam());
+//            String disk = String.valueOf(flavor.getDisk());
+//            String vcpus = String.valueOf(flavor.getVcpus());
+////            String a = ram + disk + vcpus;
+////            Integer b = flavor.getRam() + flavor.getDisk() + flavor.getVcpus();
+////            System.out.println(a + ":" + b);
+//            filteringParams.put(ram + disk + vcpus, flavor);
+//        });
 
     }
 
