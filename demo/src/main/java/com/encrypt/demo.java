@@ -11,9 +11,14 @@ public class demo {
 
     @Test
     public void test() {
-//        String backPasswd = EncryptUtils.sha512("263fec58861449aacc1c328a4aff64aff4c62df4a2d50b3f207fa89b6e242c9aa778e7a8baeffef85b6ca6d2e7dc16ff0a760d59c13c238f6bcdc32f8ce9cc62","263fec58861449aacc1c328a4aff64aff4c62df4a2d50b3f207fa89b6e242c9aa778e7a8baeffef85b6ca6d2e7dc16ff0a760d59c13c238f6bcdc32f8ce9cc62");
-        String backPasswd2 = EncryptUtils.sha512("983c0b448f310df9febe3151477f30c3ef248f80363d90e5c2bc6b37c9b32766dc335d39c239ecfefc6063b4c8efe9b7efa7e7e4639128b13bed98f597d02c39","983c0b448f310df9febe3151477f30c3ef248f80363d90e5c2bc6b37c9b32766dc335d39c239ecfefc6063b4c8efe9b7efa7e7e4639128b13bed98f597d02c39");
+        String s = EncryptUtils.sha512("awifi@123", "awifi@123");
+        String s2 = EncryptUtils.sha512("awifi@123");
+        System.out.println(s);
+        System.out.println(s2);
+        String backPasswd = EncryptUtils.sha512("Awifi@123");
+        String backPasswd2 = EncryptUtils.sha512(backPasswd,backPasswd);
         System.out.println(backPasswd2);
+        // 4e65baf89d3585f14fb5bab6017c6cc63ec3ad059e106f72a52c43c64f658e34e61c5fd601de049ffcce531103ffdc39862cb8dd0a1489398ba3ac6a265d941b
     }
 
     @Test

@@ -4,7 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -58,5 +61,13 @@ public class test {
         List<String> collect = resSet.stream().filter(Objects::nonNull).collect(Collectors.toList());
         // [aaa, bbb, 16, ddd, 17, 18, vvv, 19]
         System.out.println(collect);
+    }
+
+    @Test
+    public void tesss() throws UnsupportedEncodingException {
+        String a = "aaa-sdfasndfkasdfnasdj-asdf.xdl";
+        int i = a.indexOf("-");
+        String substring = a.substring(i + 1);
+        System.out.println(substring);
     }
 }

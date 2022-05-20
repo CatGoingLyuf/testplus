@@ -1,5 +1,8 @@
 package com.openStack;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.openstack4j.api.Apis;
@@ -119,12 +122,11 @@ public class OpenStackApiTest {
         ArrayList<Server> servers = new ArrayList<>();
 
         os.compute().servers().list().forEach(server -> {
-            if (server.getStatus().equals(Server.Status.ACTIVE)) {
-                servers.add(server);
-            }
+            System.out.println(server.getStatus());
+//            if (server.getStatus().equals(Server.Status.ACTIVE)) {
+//                servers.add(server);
+//            }
         });
-
-        System.out.println(servers);
 
     }
 
@@ -159,26 +161,27 @@ public class OpenStackApiTest {
 //        List<? extends Flavor> list = os.compute().flavors().list();
 
         // create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic)
-        Flavor testFlavor1 = Builders.flavor().name("testFlavor").ram(1024).disk(10).vcpus(1).isPublic(true).ephemeral(0).rxtxFactor(1).swap(0).build();
+//        Flavor testFlavor1 = Builders.flavor().name("testFlavor").ram(1024).disk(10).vcpus(1).isPublic(true).ephemeral(0).rxtxFactor(1).swap(0).build();
 //        Flavor flavor = os.compute().flavors().create(testFlavor1);
         HashMap<String, String> map = new HashMap<>();
 
-        List<? extends Flavor> list = os.compute().flavors().list();
-        Flavor testFlavor = list.stream().filter(flavor -> flavor.getName().equals("testFlavor")).collect(Collectors.toList()).get(0);
+//        Lists.reverse()
 
-        ActionResponse delete = os.compute().flavors().delete(testFlavor.getId());
 
-        System.out.println(delete);
-
+        // list
+//        List<? extends Flavor> list = os.compute().flavors().list();
+//        Flavor testFlavor = list.stream().filter(flavor -> flavor.getName().equals("testFlavor")).collect(Collectors.toList()).get(0);
+        // delete
+//        ActionResponse delete = os.compute().flavors().delete("75fcc94b-bae0-4e05-8005-992f97902c77");
+        // creat
 //        Flavor testFlavor1 = os.compute().flavors().create("testFlavor", 1024, 1, 10, 0, 0, 1, true);
+
 //        try {
 //            Flavor flavor = os.compute().flavors().create(testFlavor1);
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
 
-//        ActionResponse delete = os.compute().flavors().delete(flavor.getId());
-//        System.out.println(delete);
 
 //        list.forEach(flavor -> {
 //            String ram = String.valueOf(flavor.getRam());
