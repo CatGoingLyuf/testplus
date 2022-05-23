@@ -29,9 +29,12 @@ public class ExcelWriteTest {
          List<List<String>> data = new ArrayList<>();
          for (int i = 0; i < 100; i++) {
             List<String> item = new ArrayList<>();
-            item.add("item0" + i);
-            item.add("item1" + i);
-            item.add("item2" + i);
+            item.add("行标签" + i);
+            item.add("新装宽带总数" + i);
+            item.add("其中有一次性礼包" + i);
+            item.add("其中有包月礼包" + i);
+            item.add("WIFI合计" + i);
+            item.add("渗透率" + i);
             data.add(item);
          }
          writer.write0(data, sheet1);
