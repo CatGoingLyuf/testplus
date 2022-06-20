@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -69,5 +67,21 @@ public class test {
         int i = a.indexOf("-");
         String substring = a.substring(i + 1);
         System.out.println(substring);
+    }
+
+    @Test
+    public void tessss() {
+        User aaa = new User("aaa", "16", "1", "10");
+        User vvv = new User("vvv", "17", "1", "10");
+        User bbb = new User("bbb", "18", "1", "10");
+        User ddd = new User("ddd", "19", "1", "10");
+        List<User> userList = Collections.emptyList();
+        List<User> list = new ArrayList<>(userList);
+        list.add(aaa);
+        list.add(vvv);
+        list.add(bbb);
+        list.add(ddd);
+        // user 数据封装成 user2
+        List<User2> collect = list.stream().map(User2::new).collect(Collectors.toList());
     }
 }
