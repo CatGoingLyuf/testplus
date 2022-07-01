@@ -11,11 +11,11 @@ import lombok.Data;
 public class User {
 
     private String name;
-    private String age;
+    private Integer age;
     private String max;
     private String min;
 
-    public User(String name, String age, String max, String min) {
+    public User(String name, Integer age, String max, String min) {
         this.name = name;
         this.age = age;
         this.max = max;

@@ -11,7 +11,7 @@ import lombok.Data;
 public class User2 {
 
     private String name;
-    private String age;
+    private Integer age;
     private String max;
 
     public User2(User user) {

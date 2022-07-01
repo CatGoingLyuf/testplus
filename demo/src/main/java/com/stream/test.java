@@ -39,10 +39,10 @@ public class test {
 
     @Test
     public void test() {
-        User aaa = new User("aaa", "16", "1", "10");
-        User vvv = new User("vvv", "17", "1", "10");
-        User bbb = new User("bbb", "18", "1", "10");
-        User ddd = new User("ddd", "19", "1", "10");
+        User aaa = new User("aaa", 16, "1", "10");
+        User vvv = new User("vvv", 17, "1", "10");
+        User bbb = new User("bbb", 18, "1", "10");
+        User ddd = new User("aaa", 17, "1", "10");
         //此List与常用的List不同，它是Collections类里的静态内部类，在继承AbstractList后并没有实现add()、remove()等方法，所以返回的List不能进行增加和删除元素操作。
         List<User> userList = Collections.emptyList();
         List<User> list = new ArrayList<>(userList);
@@ -53,12 +53,23 @@ public class test {
 
         HashSet<String> resSet = Sets.newHashSet();
         // 使用Lists.transform把对象list中的某个属性取出来  返回一个新的list 对于同一个List集合中，假定想获取User类中的String Age,String Name,两个属性的值情况的并集。
-        resSet.addAll(Lists.transform(list, User::getAge));
+        resSet.addAll(Lists.transform(list, User::getMax));
         resSet.addAll(Lists.transform(list, User::getName));
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        List<String> transform = Lists.transform(list, User::getName);
+        arrayList.addAll(transform);
 
         List<String> collect = resSet.stream().filter(Objects::nonNull).collect(Collectors.toList());
         // [aaa, bbb, 16, ddd, 17, 18, vvv, 19]
-        System.out.println(collect);
+
+        // 去重Int
+        List<Integer> collect1 = list.stream().distinct().map(User::getAge).collect(Collectors.toList());
+        System.out.println(collect1);
+        // 去重String
+        ArrayList<User> collect2 = list.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))), ArrayList::new));
+        System.out.println(collect2);
+
     }
 
     @Test
@@ -71,10 +82,10 @@ public class test {
 
     @Test
     public void tessss() {
-        User aaa = new User("aaa", "16", "1", "10");
-        User vvv = new User("vvv", "17", "1", "10");
-        User bbb = new User("bbb", "18", "1", "10");
-        User ddd = new User("ddd", "19", "1", "10");
+        User aaa = new User("aaa", 16, "1", "10");
+        User vvv = new User("vvv", 17, "1", "10");
+        User bbb = new User("bbb", 18, "1", "10");
+        User ddd = new User("ddd", 17, "1", "10");
         List<User> userList = Collections.emptyList();
         List<User> list = new ArrayList<>(userList);
         list.add(aaa);
