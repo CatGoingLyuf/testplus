@@ -22,17 +22,14 @@ import java.util.List;
 public class demo {
     @SneakyThrows
     public static void main(String[] args) {
-        String qq = "120";
-        String pwd = "123123";
-        String destFilePath = "D:\\bbb.txt";
+        String destFilePath = "D:\\2021年国考行测真题(副省级).txt";
         File file = new File(destFilePath);
         FileWriter fileWriter = new FileWriter(file);
-        File input = new File("D:/qq.html");
         long start = System.currentTimeMillis();
         // 爬虫工具包 jsoup
         try {
             // 首先要拿到我们请求的网页的地址
-            String url = "https://www.nowcoder.com/exam/interview";
+            String url = "https://www.zxgj.cn/g/xingce";
             // Jsoup 来模拟一下手动设置 cookie 方式
 //            Connection.Response res = Jsoup.connect("https://user.qzone.qq.com/proxy/domain/m.qzone.qq.com/cgi-bin/new/get_msgb")
 //                    .data("username", qq, "password", pwd)

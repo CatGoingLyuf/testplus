@@ -1,9 +1,13 @@
 package com;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import scala.collection.Set;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -78,10 +82,12 @@ public class test {
     }
 
 
-    public static String  test2(String s) {
-        String[] s1 = s.trim().split(" +");
+    @Test
+    public void test2() {
+        String s = "adsf +safsdf";
+        String[] s1 = s.trim().split("");
         Collections.reverse(Arrays.asList(s1));
-        return String.join(" ",s1);
+        System.out.println(String.join(" ", s1));
     }
 
     public static String test3(int[] nums) {
@@ -101,20 +107,55 @@ public class test {
     }
 
     public void backtrack(List<List<Integer>> res, List<Integer> list, int[] nums) {
-        if(list.size() == nums.length) {
+        if (list.size() == nums.length) {
             res.add(new ArrayList<Integer>(list));
             return;
         }
-        for(int num : nums) {
-            if(!list.contains(num)) {
+        for (int num : nums) {
+            if (!list.contains(num)) {
                 list.add(num);
                 backtrack(res, list, nums);
                 list.remove(list.size() - 1);
             }
         }
     }
+
+    @Test
+    public void testtt() {
+        List<String> strings = Arrays.asList("asdf", "fhhhhh", "adfrhf", "asdfhjj");
+
+        //新建空集合，用来存储查询出来的数据
+        JSONArray responseArray = new JSONArray();
+        //模糊查询 使用（Pattern、Matcher）
+        Pattern pattern = Pattern.compile("asdf");
+        for (int i = 0; i < strings.size(); i++) {
+            String s = strings.get(i);
+            if (s != null) {
+                Matcher matcher = pattern.matcher(s);
+                if (matcher.find()) {  //matcher.find()-为模糊查询   matcher.matches()-为精确查询
+                    responseArray.add(strings.get(i));
+                }
+            }
+        }
+        System.out.println(responseArray);
+
+    }
+
     public static void main(String[] args) {
 
+        String a = "aaaaaaaaaa";
+        //trim  删除字符串的头尾空白符
+//        System.out.println(a.trim());
+
+//        String s = new String("bbbbb");
+//        System.out.println(s.intern());
+
+        String c = a + "";
+        // String c = new StringBuilder().append(a).append(null).toString();
+//        System.out.println(a + "");
+//        System.out.println(a.concat(""));
+        boolean a1 = c.matches("a");
+        System.out.println(a1);
     }
 
 }

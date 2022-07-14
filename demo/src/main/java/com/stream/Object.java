@@ -16,7 +16,7 @@ public class Object {
 
     public Object(User user) {
         this.peopleName = user.getName();
-        this.age = user.getAge();
-        this.born = (2022L - Long.parseLong(user.getAge())) + "年";
+        this.age = String.valueOf(user.getAge());
+        this.born = (2022L - Long.parseLong(String.valueOf(user.getAge()))) + "年";
     }
 }
